@@ -1,6 +1,6 @@
 <?php
     
-    $host = 'localhost:3316';
+    $host = 'localhost';
     $user = 'airsoftb_aleigles';
     $password = '71811452Ale*';
     $db = 'airsoftb_naxsan';
