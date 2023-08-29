@@ -1,7 +1,7 @@
 <?php
     
     $host = 'localhost';
-    $user = 'airsoftb_aleigles';
+    $user = 'airsoftb_naxsan';
     $password = '71811452Ale*';
     $db = 'airsoftb_naxsan';
 
