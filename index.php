@@ -1,44 +1,47 @@
 <?php
+
 $alert = '';
 session_start();
 if (!empty($_SESSION['active'])) {
-    header('location: sistema/');
+  header('location: sistema/');
 } else {
-    if (!empty($_POST)) {
-        if (empty($_POST['usuario']) || empty($_POST['clave'])) {
-            $alert = "Ingrese su Usuario y Clave";
-        } else {
-            require_once "conexion.php";
-            
-            $user = mysqli_real_escape_string($conexion, $_POST['usuario']);
-            $pass = $_POST['clave']; // No se realiza un hash aquí
-            
-            $query = "SELECT * FROM usuario WHERE usuario = ? LIMIT 1";
-            $stmt = mysqli_prepare($conexion, $query);
-            mysqli_stmt_bind_param($stmt, "s", $user);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            
-            if ($result && mysqli_num_rows($result) > 0) {
-                $data = mysqli_fetch_assoc($result);
-                if (password_verify($pass, $data['clave'])) {
-                    $_SESSION['active'] = true;
-                    $_SESSION['iduser'] = $data['idusuario'];
-                    $_SESSION['nombre'] = $data['nombre'];
-                    $_SESSION['user'] = $data['usuario'];
-                    $_SESSION['rol'] = $data['rol'];
-                    header('location: sistema/');
-                } else {
-                    $alert = "El Usuario o Clave son Incorrectos";
-                }
-            } else {
-                $alert = "El Usuario o Clave son Incorrectos";
-            }
-            
-            mysqli_stmt_close($stmt);
-            mysqli_close($conexion);
-        }
+
+
+
+
+  if (!empty($_POST)) {
+    if (empty($_POST['usuario']) || empty($_POST['clave'])) {
+      $alert = "Ingrese su Usuario y Clave ";
+    } else {
+
+      require_once "conexion.php";
+
+      $user = mysqli_real_escape_string($conexion, $_POST['usuario']);
+      $pass = md5(mysqli_real_escape_string($conexion, $_POST['clave']));
+
+      $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' AND clave = '$pass' ");
+      mysqli_close($conexion);
+      $result = mysqli_num_rows($query);
+
+      if ($result > 0) {
+        $data = mysqli_fetch_array($query);
+
+
+
+        $_SESSION['active'] = true;
+        $_SESSION['iduser'] = $data['idusuario'];
+        $_SESSION['nombre'] = $data['nombre'];
+        //$_SESSION['correo'] = $data['correo'];
+        $_SESSION['user'] = $data['usuario'];
+        $_SESSION['rol'] = $data['rol'];
+
+        header('location: sistema/');
+      } else {
+        $alert = "El Usuario o Clave son Incorrectos";
+        session_destroy();
+      }
     }
+  }
 }
 ?>
 
