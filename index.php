@@ -31,7 +31,7 @@ if (!empty($_SESSION['active'])) {
         $_SESSION['active'] = true;
         $_SESSION['iduser'] = $data['idusuario'];
         $_SESSION['nombre'] = $data['nombre'];
-        $_SESSION['email'] = $data['email'];
+        $_SESSION['email'] = $data['correo'];
         $_SESSION['user'] = $data['usuario'];
         $_SESSION['rol'] = $data['rol'];
 
