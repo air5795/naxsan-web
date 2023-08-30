@@ -1,13 +1,8 @@
 <?php
     
     session_start();
-
-    
-
-    $usuario = $_SESSION['user'];
-
     include "../../conexion.php";
-
+    $usuario = $_SESSION['user'];
 ?>
 
 

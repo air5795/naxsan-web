@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 date_default_timezone_set('America/La_Paz');
 
@@ -9,6 +8,7 @@ include("funciones.php");
 $query = "";
 $salida = array();
 $query = "SELECT * from asis  ";
+
 
 if (isset($_POST["search"]["value"])) {
    $query .= 'WHERE observacion LIKE "%' . $_POST["search"]["value"] . '%" ';
@@ -152,12 +152,6 @@ $filtered_rows = $stmt->rowCount();
         }
 
         }
-
-        
-
-
-
-
         
         $sub_array[] = $fila["observacion"];
 
