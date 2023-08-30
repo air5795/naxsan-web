@@ -271,7 +271,13 @@
                                     //$query = mysqli_query($conexion, "SELECT * FROM gastos
                                     //ORDER BY id_gasto DESC;");
 
-                                    $query = mysqli_query($conexion, "SELECT ROW_NUMBER() OVER(ORDER BY id_proyecto ) row_num, id_proyecto, pro_nombre, color FROM proyectos ORDER BY id_proyecto DESC");
+                                    $query = mysqli_query($conexion, "SELECT 
+                                    id_proyecto, 
+                                    pro_nombre, 
+                                    color,
+                                    ROW_NUMBER() OVER(ORDER BY id_proyecto DESC) AS row_num 
+                                  FROM proyectos 
+                                  ORDER BY id_proyecto DESC;");
 
                                 
 
