@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set('America/La_Paz');
 
-
+include("../../conexion.php");
 include("conexion.php");
 include("funciones.php");
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('America/La_Paz');
-
+include("../../conexion.php");
 include("conexion.php");
 include("funciones.php");
 
@@ -161,8 +161,8 @@ $filtered_rows = $stmt->rowCount();
         $sub_array[] = '<button type="button" name="borrar" id="'.$fila["id_asistencia"].'" class="btn btn-danger btn-sm boton-w borrar1" style="background-color: #ff5757;color: #505050; color:white;"><i class="fa-solid fa-trash-can"></i> </button>';
 
         } else{
-            $sub_array[] = 'error';
-            $sub_array[] = 'error';
+            $sub_array[] = '';
+            $sub_array[] = '';
         }
         
         $datos[] = $sub_array;
