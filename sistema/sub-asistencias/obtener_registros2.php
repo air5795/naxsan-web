@@ -155,15 +155,14 @@ $filtered_rows = $stmt->rowCount();
         
         $sub_array[] = $fila["observacion"];
 
-        session_start();
         if ($_SESSION['rol'] == 1) {
 
         $sub_array[] = '<button type="button" name="editar" id="'.$fila["id_asistencia"].'" class="btn btn-warning btn-sm boton-w editar1" style="background-color: #fbe806;color: #505050; color:#767676;"><i class="fa-solid fa-pencil"></i> </button>';
         $sub_array[] = '<button type="button" name="borrar" id="'.$fila["id_asistencia"].'" class="btn btn-danger btn-sm boton-w borrar1" style="background-color: #ff5757;color: #505050; color:white;"><i class="fa-solid fa-trash-can"></i> </button>';
 
         } else{
-            $sub_array[] = '';
-            $sub_array[] = '';
+            $sub_array[] = 'error';
+            $sub_array[] = 'error';
         }
         
         $datos[] = $sub_array;
