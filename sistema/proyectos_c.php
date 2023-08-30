@@ -210,7 +210,7 @@
                                                     if ($result > 0) {
                                                     while ($data = mysqli_fetch_array($query)) {
                                                         echo '<option value="'.$data['pro_nombre'].'">'.$data['pro_nombre'].'</option>';
-                                                        $nombre = $data['p_descripcion'];
+                                                        //$nombre = $data['p_descripcion'];
                                                     }}
                                                 ?>
                                             </select>
