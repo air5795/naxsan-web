@@ -2,10 +2,9 @@
     
     session_start();
 
-    
-
+    $usuario = '';
     $usuario = $_SESSION['user'];
-
+    echo $usuario;
     include "../../conexion.php";
 
 ?>
