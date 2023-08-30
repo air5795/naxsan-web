@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `naxsan`
 --
+CREATE DATABASE IF NOT EXISTS `naxsan` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `naxsan`;
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `asis` (
   `id_asistencia` int(11) NOT NULL AUTO_INCREMENT,
   `ingreso` datetime NOT NULL DEFAULT current_timestamp(),
   `salida` datetime NOT NULL DEFAULT current_timestamp(),
-  `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_registro` date NOT NULL DEFAULT current_timestamp(),
   `observacion` varchar(250) NOT NULL,
   `estado` int(10) NOT NULL DEFAULT 1,
   `usuario_id` varchar(255) NOT NULL,
@@ -2822,7 +2824,7 @@ CREATE TABLE IF NOT EXISTS `exp_general` (
   `ubicacion` varchar(50) DEFAULT NULL,
   `monto_bs` decimal(19,2) NOT NULL,
   `monto_dolares` decimal(19,2) NOT NULL,
-  `fecha_ejecucion` datetime NOT NULL,
+  `fecha_ejecucion` date NOT NULL,
   `participa_aso` varchar(50) NOT NULL,
   `n_socio` varchar(50) NOT NULL,
   `profesional_resp` varchar(50) NOT NULL,
@@ -2832,18 +2834,18 @@ CREATE TABLE IF NOT EXISTS `exp_general` (
   `image` text DEFAULT NULL,
   `image2` text NOT NULL,
   `image3` text NOT NULL,
-  `image4` text NOT NULl,
-  `image5` text NOT NULL,
-  `image6` text NOT NULL,
-  `image7` text NOT NULL,
-  `image8` text NOT NULL,
-  `image9` text NOT NULL,
-  `image10` text NOT NULL,
-  `image11` text NOT NULL,
-  `image12` text NOT NULL,
-  `image13` text NOT NULL,
-  `image14` text NOT NULL,
-  `image15` text NOT NULL,
+  `image4` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL DEFAULT '0',
+  `image5` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `image6` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `image7` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `image8` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `image9` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image10` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image11` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image12` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image13` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image14` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image15` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_exp`),
   KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -2870,8 +2872,8 @@ CREATE TABLE IF NOT EXISTS `exp_general_c` (
   `ubicacion` varchar(50) DEFAULT NULL,
   `monto_bs` decimal(19,2) NOT NULL,
   `monto_dolares` decimal(19,2) NOT NULL,
-  `fecha_ejecucion` datetime NOT NULL,
-  `fecha_final` datetime NOT NULL,
+  `fecha_ejecucion` date NOT NULL,
+  `fecha_final` date NOT NULL,
   `participa_aso` varchar(50) NOT NULL,
   `n_socio` varchar(50) NOT NULL,
   `profesional_resp` varchar(50) NOT NULL,
@@ -2896,7 +2898,7 @@ CREATE TABLE IF NOT EXISTS `gastos` (
   `g_detalle` longtext NOT NULL,
   `g_montoBs` decimal(19,2) NOT NULL,
   `g_montoU` decimal(19,2) NOT NULL,
-  `g_fecha_i` datetime NOT NULL,
+  `g_fecha_i` date NOT NULL,
   `g_respaldo` text NOT NULL,
   PRIMARY KEY (`id_gasto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -2913,7 +2915,7 @@ CREATE TABLE IF NOT EXISTS `gastos_c` (
   `g_detalleGasto` varchar(250) NOT NULL,
   `g_montoBs` decimal(20,2) NOT NULL,
   `g_montoU` int(11) NOT NULL,
-  `g_fechai` datetime NOT NULL,
+  `g_fechai` date NOT NULL,
   `g_respaldo` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `g_origenDinero` varchar(200) NOT NULL,
   `contar` varchar(200) NOT NULL,
@@ -2968,7 +2970,7 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
   `persona` varchar(80) DEFAULT NULL,
   `montoBs` decimal(19,2) NOT NULL,
   `montoU` decimal(19,2) NOT NULL,
-  `fecha_i` datetime NOT NULL,
+  `fecha_i` date NOT NULL,
   `respaldo` text NOT NULL,
   PRIMARY KEY (`id_ingreso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -2985,7 +2987,7 @@ CREATE TABLE IF NOT EXISTS `ingresos_c` (
   `origen` varchar(250) NOT NULL,
   `montoBs` decimal(10,2) NOT NULL,
   `montoU` int(11) NOT NULL,
-  `fecha_i` datetime NOT NULL,
+  `fecha_i` date NOT NULL,
   `respaldo` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`id_ingresosC`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -3010,7 +3012,7 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   `stock` int(11) NOT NULL,
   `foto` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `categoria_id` int(11) NOT NULL,
-  `fecha_add` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_add` date NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_inv`),
   KEY `categoria_id` (`categoria_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
@@ -5214,7 +5216,7 @@ CREATE TABLE IF NOT EXISTS `proyectos_comer` (
   `cuce` varchar(250) NOT NULL,
   `monto` decimal(19,2) NOT NULL,
   `monto_ofertado` decimal(19,2) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` date NOT NULL,
   `estado` varchar(100) NOT NULL,
   `observacion` longtext NOT NULL,
   `posicion` varchar(255) NOT NULL,
@@ -5257,7 +5259,7 @@ CREATE TABLE IF NOT EXISTS `recibos` (
   `nombre_r` varchar(250) NOT NULL,
   `monto` float NOT NULL,
   `concepto` varchar(250) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` date NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `dateadd` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_recibo`),
@@ -5423,8 +5425,8 @@ INSERT INTO `s` (`id_pros`, `Column_1`, `Column_2`, `Column_3`, `Column_4`, `Col
 CREATE TABLE IF NOT EXISTS `salidas` (
   `id_salida` int(11) NOT NULL AUTO_INCREMENT,
   `personal` varchar(255) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `hora` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `hora` time NOT NULL DEFAULT current_timestamp(),
   `lugar` varchar(255) NOT NULL,
   `motivo` longtext NOT NULL,
   PRIMARY KEY (`id_salida`)
@@ -5478,7 +5480,11 @@ ALTER TABLE `activo_fijo`
 ALTER TABLE `asistencias`
   ADD CONSTRAINT `asistencias_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idusuario`);
 
 --
 -- Filtros para la tabla `exp_general`
