@@ -275,8 +275,9 @@
                                     id_proyecto, 
                                     pro_nombre, 
                                     color,
-                                    ROW_NUMBER() OVER(ORDER BY id_proyecto DESC) AS row_num 
+                                    (@row_number:=@row_number + 1) AS row_num 
                                   FROM proyectos 
+                                  CROSS JOIN (SELECT @row_number := 0) AS rn 
                                   ORDER BY id_proyecto DESC;");
 
                                 
